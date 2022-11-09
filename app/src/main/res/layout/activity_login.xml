@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signup_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -79,7 +79,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2">
+        app:layout_constraintTop_toBottomOf="@+id/signup_button">
 
 
         <TextView

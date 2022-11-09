@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val signinBtn = findViewById<Button>(R.id.signin_button)
+        val signupBtn = findViewById<Button>(R.id.signup_button)
         val visitorBtn = findViewById<LinearLayout>(R.id.linearLayout)
 
 
@@ -21,6 +22,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        signupBtn.setOnClickListener {
+            intent = Intent(this,SignUpActivity::class.java)
+            startActivity(intent)
+        }
         visitorBtn.setOnClickListener {
             intent = Intent(this,AcceuilActivity::class.java)
             startActivity(intent)
