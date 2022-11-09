@@ -12,5 +12,8 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="create_your_account">Create Your Account</string>
     <string name="cin">CIN</string>
-    <string name="do_you_have_an_account">Do you have an account ?</string>
+    <string name="do_you_have_an_account">Do you have<br/> an account ?</string>
+    <string name="backg_text">Fast &amp;<br/>easy</string>
+    <string name="backg_text1">Visit &amp;<br/>get</string>
+    <string name="backg_text2">Ready &amp;<br/>to go</string>
 </resources>
