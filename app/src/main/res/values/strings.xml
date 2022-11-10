@@ -13,4 +13,5 @@
     <string name="create_your_account">Create Your Account</string>
     <string name="cin">CIN</string>
     <string name="do_you_have_an_account">Do you have an account ?</string>
+    <string name="name">Name</string>
 </resources>
