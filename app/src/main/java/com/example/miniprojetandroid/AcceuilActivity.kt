@@ -17,13 +17,13 @@ class AcceuilActivity : AppCompatActivity() {
         rv.layoutManager= LinearLayoutManager(this)
 
 
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
-        stations.add(Station(R.drawable.kiosque,"ahri"))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
+        stations.add(Station(R.drawable.kiosque,"ahri",1.2,1.2))
         var adapter=StationAdapter(stations,this)
         val layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,true)
         rv.layoutManager = layoutManager
