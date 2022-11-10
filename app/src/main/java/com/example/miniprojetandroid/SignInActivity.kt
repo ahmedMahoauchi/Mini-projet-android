@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -22,8 +23,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
-    lateinit var emailET : TextInputLayout
-    lateinit var passwordET : TextInputLayout
+    lateinit var emailET : EditText
+    lateinit var passwordET : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,15 +53,15 @@ class SignInActivity : AppCompatActivity() {
 
         emailET.error = null
         passwordET.error = null
-        val textFields = arrayOf<TextInputLayout>(emailET, passwordET,)
-        if(emailET.editText?.text.toString().equals("") || passwordET.editText?.text.toString().equals("")){
+        val textFields = arrayOf<EditText>(emailET, passwordET)
+        if(emailET.text.toString().equals("") || passwordET.text.toString().equals("")){
             for (i in textFields.indices){
-                if (textFields[i].editText?.text.toString().equals("")){
+                if (textFields[i].text.toString().equals("")){
                     textFields[i].error = "Must not be empty !"
                 }
             }
             return false
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(emailET.editText?.text.toString()).matches()){
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(emailET.text.toString()).matches()){
             emailET.error = "Check your email !"
             return false
         }else{
@@ -75,8 +76,8 @@ class SignInActivity : AppCompatActivity() {
                 val apiInterface = ApiUser.create()
                 val map: HashMap<String, String> = HashMap()
 
-                map["email"] = emailET.editText?.text.toString()
-                map["password"] = passwordET.editText?.text.toString()
+                map["email"] = emailET.text.toString()
+                map["password"] = passwordET.text.toString()
                 CoroutineScope(Dispatchers.IO).launch {
                     apiInterface.login(map).enqueue(object : Callback<LoginResponse> {
                         override fun onResponse(call: Call<LoginResponse>, response:

@@ -4,5 +4,5 @@
         android:color="@color/black"
         />
     <corners
-        android:radius="10dp"/>
+        android:radius="20dp"/>
 </shape>

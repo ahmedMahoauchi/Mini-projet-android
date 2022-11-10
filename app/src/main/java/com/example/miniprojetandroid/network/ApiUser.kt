@@ -19,8 +19,8 @@ interface ApiUser {
     @POST("login")
     fun login(@Body map : HashMap<String, String> ): Call<LoginResponse>
 
-    @POST("/register")
-    fun register(@Body map : HashMap<String, String> ): Call<User>
+    @POST("register")
+    fun register(@Body map : HashMap<String, String> ): Call<UserX>
 
 
 
