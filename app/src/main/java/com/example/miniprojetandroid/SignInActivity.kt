@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.miniprojetandroid.entities.GetUserByEmailResponse
 import com.example.miniprojetandroid.entities.LoginResponse
 import com.example.miniprojetandroid.entities.UserX
 import com.example.miniprojetandroid.network.ApiUser
@@ -33,6 +34,8 @@ class SignInActivity : AppCompatActivity() {
         val signinButton = findViewById<Button>(R.id.button)
          emailET = findViewById(R.id.email_edittext)
          passwordET = findViewById(R.id.password_edittext)
+         val forgetpassword = findViewById<TextView>(R.id.textView13)
+
 
 
         signpBtn.setOnClickListener{
@@ -46,14 +49,21 @@ class SignInActivity : AppCompatActivity() {
 
         }
 
+        forgetpassword.setOnClickListener{
+            intent = Intent(this,SendResetPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
     }
 
     private fun isValide(): Boolean {
 
+
         emailET.error = null
         passwordET.error = null
-        val textFields = arrayOf<EditText>(emailET, passwordET)
+        val textFields = arrayOf(emailET, passwordET)
         if(emailET.text.toString().equals("") || passwordET.text.toString().equals("")){
             for (i in textFields.indices){
                 if (textFields[i].text.toString().equals("")){
@@ -88,12 +98,24 @@ class SignInActivity : AppCompatActivity() {
                             if(user != null){
                                // Toast.makeText(this@SignInActivity,user.toString(),Toast.LENGTH_SHORT).show()
 
-                                val intent = Intent(this@SignInActivity, AcceuilActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                                if(response.body()!!.user.role == 0){
+                                    val intent = Intent(this@SignInActivity, User1Activity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }else{
+                                    val intent = Intent(this@SignInActivity, AdminActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+
                             }else{
-                                Log.e("error : ", user.toString())
-                                Toast.makeText(this@SignInActivity,"Username or Password wrong !!", Toast.LENGTH_SHORT).show()
+                                if (checkExistance()){
+                                    Toast.makeText(this@SignInActivity,"Mot de passe incorrect !!", Toast.LENGTH_SHORT).show()
+                                }else{
+                                    Toast.makeText(this@SignInActivity,"You have to create an account", Toast.LENGTH_SHORT).show()
+                                }
+
+
                             }
                         }
 
@@ -108,6 +130,34 @@ class SignInActivity : AppCompatActivity() {
             }
 
 
+    }
+
+    fun checkExistance() : Boolean{
+        val apiInterface = ApiUser.create()
+        var reponse:Boolean=true
+        apiInterface.getByEmail(emailET.text.toString()).enqueue(object :
+            Callback<GetUserByEmailResponse> {
+
+            override fun onResponse(call: Call<GetUserByEmailResponse>, response:
+            Response<GetUserByEmailResponse>
+            ) {
+                val user = response.body()?.user
+                Log.e("user : ", user.toString())
+                if(user == null)
+                {
+                     reponse=false
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<GetUserByEmailResponse>, t: Throwable) {
+                Toast.makeText(this@SignInActivity,"connexion failed",Toast.LENGTH_SHORT).show()
+            }
+
+
+        })
+        return reponse
     }
 
 
