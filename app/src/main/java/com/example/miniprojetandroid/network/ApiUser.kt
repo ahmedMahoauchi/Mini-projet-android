@@ -2,7 +2,6 @@ package com.example.miniprojetandroid.network
 
 import com.example.miniprojetandroid.entities.*
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
@@ -14,7 +13,7 @@ import retrofit2.http.Path
 interface ApiUser {
 
     @GET("users")
-    suspend fun getUsers() : Response<User>
+    fun getUsers() : Call<User>
 
     @POST("login")
     fun login(@Body map : HashMap<String, String> ): Call<LoginResponse>
@@ -34,7 +33,9 @@ interface ApiUser {
 
 
     companion object {
-        var BASE_URL = "http://192.168.1.2:9092/user/"
+        //var BASE_URL = "http://192.168.1.6:9092/user/"
+        var BASE_URL = "http://172.16.7.17:9092/user/"
+
         fun create() : ApiUser {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

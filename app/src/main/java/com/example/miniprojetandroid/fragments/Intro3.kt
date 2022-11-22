@@ -28,7 +28,8 @@ class Intro3 : Fragment() {
         button.setOnClickListener {
             activity?.let{
                 val intent = Intent (it, SignInActivity::class.java)
-                it.startActivity(intent)}
+                it.startActivity(intent)
+            it.finish()}
 
             }
         return view

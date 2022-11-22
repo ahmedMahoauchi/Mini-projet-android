@@ -19,6 +19,7 @@ import retrofit2.Response
 class NewPasswordActivity : AppCompatActivity() {
     lateinit var new_password : EditText
     lateinit var email : String
+    lateinit var reponse : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_password)
@@ -34,40 +35,44 @@ class NewPasswordActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                decomteur.setText("done!")
+                decomteur.setText("You Link Has Expired !")
             }
         }.start()
 
 
          email = intent.getStringExtra("email").toString()
 
+        reponse = ""
         new_password = findViewById(R.id.new_password)
+        getResetLinks(reponse)
         val button = findViewById<Button>(R.id.button)
-        Toast.makeText(this@NewPasswordActivity,getResetLinks(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this@NewPasswordActivity,reponse, Toast.LENGTH_SHORT).show()
         button.setOnClickListener {
 
 
 
-            //sendPassword()
+
+            Log.e("ramzi",reponse.toString())
+            sendPassword()
         }
 
 
     }
 
-    private fun getResetLinks() :String {
+    private fun getResetLinks(reponse : String) {
         val apiInterface = ApiUser.create()
-        var reponse:String="true"
         apiInterface.getByEmail(email).enqueue(object :
             Callback<GetUserByEmailResponse> {
 
             override fun onResponse(call: Call<GetUserByEmailResponse>, response:
             Response<GetUserByEmailResponse>
             ) {
+
                 val user = response.body()?.user
                 Log.e("user : ", user.toString())
                 if(user != null)
                 {
-                    Log.e("usersssss",user.toString())
+                    this@NewPasswordActivity.reponse = user.resetLink
 
                 }else{
                     Log.e("usersssss",response.body().toString())
@@ -81,14 +86,14 @@ class NewPasswordActivity : AppCompatActivity() {
 
 
         })
-        return reponse
+
     }
 
     private fun sendPassword() {
         val apiInterface = ApiUser.create()
         val map: HashMap<String, String> = HashMap()
 
-        //map["resetLink"] = resetLink
+        map["resetLink"] = reponse
         map["newPass"] = new_password.text.toString()
 
         apiInterface.resetPassword(map).enqueue(object : Callback<ResetResponse> {

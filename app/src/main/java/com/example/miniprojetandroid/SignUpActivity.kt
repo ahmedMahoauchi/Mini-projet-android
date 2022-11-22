@@ -64,8 +64,9 @@ class SignUpActivity : AppCompatActivity() {
 
                 if (user != null){
                     Toast.makeText(this@SignUpActivity, user.toString(), Toast.LENGTH_SHORT).show()
-                   // val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                   // startActivity(intent)
+                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }else{
 
                     Log.e("test",user.toString())

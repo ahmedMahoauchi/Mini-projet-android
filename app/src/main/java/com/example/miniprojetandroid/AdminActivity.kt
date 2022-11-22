@@ -1,34 +1,51 @@
 package com.example.miniprojetandroid
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.miniprojetandroid.databinding.ActivityAdminBinding
+import androidx.fragment.app.Fragment
+import com.example.miniprojetandroid.fragments.AdminKiosqueFragment
+import com.example.miniprojetandroid.fragments.AdminPendingKiosqueFragment
+import com.example.miniprojetandroid.fragments.AdminUsersFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAdminBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_admin)
 
-        binding = ActivityAdminBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        val navView: BottomNavigationView = binding.navView
+       bottomNavigation.setOnItemSelectedListener{
+            when (it.itemId) {
+                R.id.kiosques -> {
+                    val fragment = AdminKiosqueFragment()
+                    showFragment(fragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.users -> {
+                    val fragment = AdminUsersFragment()
+                    showFragment(fragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.pending -> {
+                    val fragment = AdminPendingKiosqueFragment()
+                    showFragment(fragment)
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_admin)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
 
+    }
+
+    fun showFragment(fragment: Fragment){
+        val fram = supportFragmentManager.beginTransaction()
+        fram.replace(R.id.fragmentContainerView3,fragment)
+        fram.commit()
     }
 }

@@ -29,5 +29,12 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_admin">AdminActivity</string>
     <string name="products">Products :</string>
-
+    <string-array name="Languages">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Scala</item>
+        <item>Perl</item>
+    </string-array>
 </resources>
