@@ -1,6 +1,7 @@
 package com.example.miniprojetandroid
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,11 +10,13 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+<<<<<<< Updated upstream
 import androidx.recyclerview.widget.LinearLayoutManager
+=======
+import com.example.miniprojetandroid.entities.GetUserByEmailResponse
+>>>>>>> Stashed changes
 import com.example.miniprojetandroid.entities.LoginResponse
-import com.example.miniprojetandroid.entities.UserX
 import com.example.miniprojetandroid.network.ApiUser
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,16 +24,37 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+const val PREF_NAME = "DATA_PREF";
+const val USER_ID = "USER_ID";
+const val USER_NAME = "USER_NAME";
+const val USER_EMAIL = "USER_EMAIL";
+const val USER_CIN = "USER_CIN";
+const val USER_KIOSQUE = "USER_KIOSQUE";
+
 class SignInActivity : AppCompatActivity() {
+<<<<<<< Updated upstream
     lateinit var emailET : TextInputLayout
     lateinit var passwordET : TextInputLayout
 
+=======
+    lateinit var emailET : EditText
+    lateinit var passwordET : EditText
+    lateinit var mSharedPref: SharedPreferences
+>>>>>>> Stashed changes
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+        mSharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
+
         val signpBtn = findViewById<LinearLayout>(R.id.linearLayout)
         val signinButton = findViewById<Button>(R.id.button)
-         emailET = findViewById(R.id.email_edittext)
+        val visitor = findViewById<TextView>(R.id.textView7)
+
+        visitor.setOnClickListener{
+            intent = Intent(this,AcceuilActivity::class.java)
+            startActivity(intent)
+        }
+        emailET = findViewById(R.id.email_edittext)
          passwordET = findViewById(R.id.password_edittext)
 
 
@@ -85,11 +109,41 @@ class SignInActivity : AppCompatActivity() {
                             val user = response.body()?.user?._id
                             Log.d("success: ", response.body()?.user.toString())
                             if(user != null){
-                               // Toast.makeText(this@SignInActivity,user.toString(),Toast.LENGTH_SHORT).show()
+                               mSharedPref.edit().apply{
+                                   putString(USER_ID, response.body()!!.user._id)
+                                   putString(USER_NAME, response.body()!!.user.name)
+                                   putString(USER_CIN, response.body()!!.user.CIN)
+                                   putString(USER_EMAIL, response.body()!!.user.email)
+                                   if (!response.body()!!.user.myKiosque.isEmpty()){
+                                       putString(USER_KIOSQUE, response.body()!!.user.myKiosque[0])
+                                   }else{
+                                       putString(USER_KIOSQUE, "null")
+                                   }
 
+                               }.apply()
+
+<<<<<<< Updated upstream
                                 val intent = Intent(this@SignInActivity, AcceuilActivity::class.java)
                                 startActivity(intent)
                                 finish()
+=======
+                                if(response.body()!!.user.role == 0){
+                                    if (!response.body()!!.user.myKiosque.isEmpty()){
+                                        val intent = Intent(this@SignInActivity, KiosqueDetailsActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }else{
+                                        val intent = Intent(this@SignInActivity, VoidKiosqueActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                }else{
+                                    val intent = Intent(this@SignInActivity, AdminActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+
+>>>>>>> Stashed changes
                             }else{
                                 Log.e("error : ", user.toString())
                                 Toast.makeText(this@SignInActivity,"Username or Password wrong !!", Toast.LENGTH_SHORT).show()
@@ -97,7 +151,8 @@ class SignInActivity : AppCompatActivity() {
                         }
 
                         override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                            Toast.makeText(this@SignInActivity,"Connexion error!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SignInActivity,"Connexion error !", Toast.LENGTH_SHORT).show()
+                            Log.e("connexionError",t.message.toString())
                         }
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/kiosques"
+        android:icon="@drawable/gas_station_bottom"
+        android:title="Stations" />
+    <item
+        android:id="@+id/users"
+        android:icon="@drawable/account_circle"
+        android:title="Users" />
+    <item
+        android:id="@+id/pending"
+        android:icon="@drawable/pending"
+        android:title="pending" />
+
+
+</menu>

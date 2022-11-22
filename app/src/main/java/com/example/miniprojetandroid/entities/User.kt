@@ -1,5 +1,5 @@
 package com.example.miniprojetandroid.entities
 
 data class User(
-    val users: List<UserX>
+    val users: ArrayList<UserX>
 )

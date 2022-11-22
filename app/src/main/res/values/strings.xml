@@ -14,4 +14,30 @@
     <string name="cin">CIN</string>
     <string name="do_you_have_an_account">Do you have an account ?</string>
     <string name="name">Name</string>
+<<<<<<< Updated upstream
+=======
+    <string name="join_us">Join us</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="national_identity">national identity</string>
+    <string name="login">Login</string>
+    <string name="s_identifier">S\'identifier</string>
+    <string name="d_ja_inscrit">Déja inscrit ?</string>
+    <string name="title_activity_admin1">Admin1Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="products">Products :</string>
+    <string-array name="Languages">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Python</item>
+        <item>Scala</item>
+        <item>Perl</item>
+    </string-array>
+>>>>>>> Stashed changes
 </resources>
