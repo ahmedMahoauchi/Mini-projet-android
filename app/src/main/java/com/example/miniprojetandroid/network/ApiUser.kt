@@ -15,6 +15,14 @@ interface ApiUser {
     @GET("users")
     fun getUsers() : Call<User>
 
+
+    @GET("kiosques")
+    fun getKisoques() : Call<Kisoque>
+
+    @GET("pending")
+    fun getPendingKisoques() : Call<Kisoque>
+
+
     @POST("login")
     fun login(@Body map : HashMap<String, String> ): Call<LoginResponse>
 
@@ -29,6 +37,8 @@ interface ApiUser {
 
     @PUT("reset-password")
     fun resetPassword(@Body map : HashMap<String, String>): Call<ResetResponse>
+
+
 
 
 
