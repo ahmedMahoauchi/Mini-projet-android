@@ -2,24 +2,35 @@ package com.example.miniprojetandroid
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.miniprojetandroid.entities.GetUserByEmailResponse
 import com.example.miniprojetandroid.entities.LoginResponse
 import com.example.miniprojetandroid.network.ApiUser
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.HashMap
+
 
 const val PREF_NAME = "DATA_PREF";
 const val USER_ID = "USER_ID";
@@ -29,6 +40,8 @@ const val USER_CIN = "USER_CIN";
 const val USER_KIOSQUE = "USER_KIOSQUE";
 
 class SignInActivity : AppCompatActivity() {
+    lateinit var gso : GoogleSignInOptions
+    lateinit var gsc : GoogleSignInClient
     lateinit var emailET : EditText
     lateinit var passwordET : EditText
     lateinit var mSharedPref: SharedPreferences
@@ -37,8 +50,35 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         mSharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE)
 
+
+
+
+
         val signpBtn = findViewById<LinearLayout>(R.id.linearLayout)
         val signinButton = findViewById<Button>(R.id.button)
+        val btnGoogle = findViewById<ConstraintLayout>(R.id.google_signin)
+
+
+
+
+
+        gso = GoogleSignInOptions
+            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+        gsc = GoogleSignIn.getClient(this,gso)
+
+        btnGoogle.setOnClickListener {
+
+            signIn()
+//            val acct : GoogleSignInAccount = GoogleSignIn.getLastSignedInAccount(this)!!
+
+          //  if (acct != null){
+          //      Toast.makeText(this,acct.displayName,Toast.LENGTH_SHORT).show()
+          //  }
+
+        }
          emailET = findViewById(R.id.email_edittext)
          passwordET = findViewById(R.id.password_edittext)
          val forgetpassword = findViewById<TextView>(R.id.textView13)
@@ -62,6 +102,31 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
 
+
+    }
+
+    private fun signIn() {
+       val signInIntent = gsc.signInIntent
+        startActivityForResult(signInIntent,1000)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val task : Task<GoogleSignInAccount>
+
+           task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
+            try {
+                task.getResult(ApiException::class.java)
+
+            } catch (e :ApiException){
+                Toast.makeText(this,"something went wrong !",Toast.LENGTH_SHORT).show()
+            }
+
+
+            intent = Intent(this,VoidKiosqueActivity::class.java)
+            startActivity(intent)
+            finish()
 
     }
 

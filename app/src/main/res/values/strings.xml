@@ -37,4 +37,10 @@
         <item>Scala</item>
         <item>Perl</item>
     </string-array>
+
+    <string name="facebook_app_id">1180081396252009</string>
+    <string name="fb_login_protocol_scheme">fb1180081396252009</string>
+    <string name="facebook_client_token">56789</string>
+
+
 </resources>

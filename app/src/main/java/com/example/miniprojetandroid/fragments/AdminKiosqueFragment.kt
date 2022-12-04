@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniprojetandroid.R
@@ -29,7 +30,7 @@ class AdminKiosqueFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_admin_kiosque, container, false)
-        val rv=view.findViewById<RecyclerView>(R.id.kiosque_recycler)
+        val rv=view.findViewById<GridView>(R.id.kiosque_recycler)
 
         getAllUser(rv)
 
@@ -43,8 +44,8 @@ class AdminKiosqueFragment : Fragment() {
         return view
     }
 
-    private fun getAllUser(rv:RecyclerView) {
-        rv.layoutManager= LinearLayoutManager(this.context)
+    private fun getAllUser(rv:GridView) {
+
 
         val apiInterface = ApiUser.create()
 

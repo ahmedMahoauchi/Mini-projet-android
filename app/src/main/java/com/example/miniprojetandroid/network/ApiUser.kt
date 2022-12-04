@@ -44,7 +44,8 @@ interface ApiUser {
 
     companion object {
         //var BASE_URL = "http://192.168.1.6:9092/user/"
-        var BASE_URL = "http://172.16.7.17:9092/user/"
+        //var BASE_URL = "http://192.168.1.10:9092/user/"
+        var BASE_URL = "http://192.168.1.6:9092/user/"
 
         fun create() : ApiUser {
             val retrofit = Retrofit.Builder()

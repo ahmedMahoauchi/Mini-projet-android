@@ -11,4 +11,6 @@ data class UserX(
     val role: Int,
     val name: String,
     val password: String
-)
+) {
+
+}

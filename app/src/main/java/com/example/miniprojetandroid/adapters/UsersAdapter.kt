@@ -4,21 +4,24 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniprojetandroid.R
 import com.example.miniprojetandroid.entities.Station
 import com.example.miniprojetandroid.entities.UserX
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UsersAdapter(val users:ArrayList<UserX>, val context: Context? ) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var username: TextView = itemView.findViewById(R.id.textView37)
         var email: TextView = itemView.findViewById(R.id.textView38)
-        var kiosqueId: TextView = itemView.findViewById(R.id.textView41)
-        var CIN: TextView = itemView.findViewById(R.id.textView39)
-        var createdAt: TextView = itemView.findViewById(R.id.textView40)
+        //var kiosqueId: TextView = itemView.findViewById(R.id.textView41)
+        //var CIN: TextView = itemView.findViewById(R.id.textView39)
+        //var createdAt: TextView = itemView.findViewById(R.id.textView40)
 
     }
 
@@ -30,17 +33,20 @@ class UsersAdapter(val users:ArrayList<UserX>, val context: Context? ) : Recycle
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.username.text=users[position].name
         holder.email.text=users[position].email
-        if (!users[position].myKiosque.isEmpty()){
-            holder.kiosqueId.text=users[position].myKiosque[0]
-        }else{
-            holder.kiosqueId.text="don't have a station"
-        }
-        holder.CIN.text=users[position].CIN
-        holder.createdAt.text=users[position].createdAt
+      // if (!users[position].myKiosque.isEmpty()){
+      //     holder.kiosqueId.text=users[position].myKiosque[0]
+      // }else{
+      //     holder.kiosqueId.text="don't have a station"
+      // }
+      // holder.CIN.text=users[position].CIN
+      // holder.createdAt.text=users[position].createdAt
     }
 
     override fun getItemCount(): Int {
         return users.size
     }
+
+
+   
 
 }

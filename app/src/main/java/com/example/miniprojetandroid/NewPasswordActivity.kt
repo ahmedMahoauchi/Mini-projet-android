@@ -44,14 +44,10 @@ class NewPasswordActivity : AppCompatActivity() {
 
         reponse = ""
         new_password = findViewById(R.id.new_password)
-        getResetLinks(reponse)
+        getResetLinks()
         val button = findViewById<Button>(R.id.button)
         //Toast.makeText(this@NewPasswordActivity,reponse, Toast.LENGTH_SHORT).show()
         button.setOnClickListener {
-
-
-
-
             Log.e("ramzi",reponse.toString())
             sendPassword()
         }
@@ -59,7 +55,7 @@ class NewPasswordActivity : AppCompatActivity() {
 
     }
 
-    private fun getResetLinks(reponse : String) {
+    private fun getResetLinks() {
         val apiInterface = ApiUser.create()
         apiInterface.getByEmail(email).enqueue(object :
             Callback<GetUserByEmailResponse> {
