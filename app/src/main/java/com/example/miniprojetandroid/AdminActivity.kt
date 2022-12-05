@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.example.miniprojetandroid.fragments.AdminKiosqueFragment
 import com.example.miniprojetandroid.fragments.AdminPendingKiosqueFragment
 import com.example.miniprojetandroid.fragments.AdminUsersFragment
+import com.example.miniprojetandroid.fragments.ProfileAdminFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminActivity : AppCompatActivity() {
@@ -33,6 +34,11 @@ class AdminActivity : AppCompatActivity() {
                 }
                 R.id.pending -> {
                     val fragment = AdminPendingKiosqueFragment()
+                    showFragment(fragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.profile -> {
+                    val fragment = ProfileAdminFragment()
                     showFragment(fragment)
                     return@setOnItemSelectedListener true
                 }

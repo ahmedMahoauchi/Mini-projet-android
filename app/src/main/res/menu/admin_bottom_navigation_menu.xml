@@ -13,7 +13,11 @@
     <item
         android:id="@+id/pending"
         android:icon="@drawable/pending"
-        android:title="pending" />
+        android:title="Pending" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/pending"
+        android:title="Profile" />
 
 
 </menu>
