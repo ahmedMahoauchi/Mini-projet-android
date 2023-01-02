@@ -29,6 +29,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_admin">AdminActivity</string>
     <string name="products">Products :</string>
+    <string name="username">Username</string>
     <string-array name="Languages">
         <item>Java</item>
         <item>Kotlin</item>
