@@ -2,13 +2,10 @@ package com.example.miniprojetandroid
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.miniprojetandroid.entities.UserX
 import com.example.miniprojetandroid.network.ApiUser
 import retrofit2.Call
@@ -21,6 +18,7 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var password : EditText
     lateinit var name : EditText
     lateinit var email : EditText
+    lateinit var radioGroup : RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +30,7 @@ class SignUpActivity : AppCompatActivity() {
      password = findViewById(R.id.password)
      name = findViewById(R.id.name)
      email = findViewById(R.id.email)
+     radioGroup = findViewById(R.id.radioGroup)
 
       signinButton.setOnClickListener{
           intent = Intent(this,SignInActivity::class.java)
@@ -49,6 +48,14 @@ class SignUpActivity : AppCompatActivity() {
     private fun doRegister() {
         val apiInterface = ApiUser.create()
         val map: HashMap<String, String> = HashMap()
+
+        val selectedId = resources.getResourceEntryName(radioGroup.checkedRadioButtonId).toString()
+
+        if(selectedId.equals("owner")){
+            map["role"] = "0"
+        }else{
+            map["role"] = "2"
+        }
 
         map["name"] = name.text.toString()
         map["email"] = email.text.toString()

@@ -22,6 +22,7 @@ class AcceuilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_acceuil)
         mSharedPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
+        
         Toast.makeText(this,mSharedPref.getString("USER_KIOSQUE","hello"),Toast.LENGTH_SHORT).show()
 
         val bottom = findViewById<FrameLayout>(R.id.sheet_bottom)
@@ -59,9 +60,6 @@ class AcceuilActivity : AppCompatActivity() {
 
         rv.adapter=adapter
         rv1.adapter=adapter1
-
-
-
 
     }
 }

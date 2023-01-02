@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.miniprojetandroid.fragments.AdminKiosqueFragment
 import com.example.miniprojetandroid.fragments.AdminPendingKiosqueFragment
+import com.example.miniprojetandroid.fragments.AdminProfileFragment
 import com.example.miniprojetandroid.fragments.AdminUsersFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -36,6 +37,11 @@ class AdminActivity : AppCompatActivity() {
                     showFragment(fragment)
                     return@setOnItemSelectedListener true
                 }
+                R.id.profile -> {
+                    val fragment = AdminProfileFragment()
+                    showFragment(fragment)
+                    return@setOnItemSelectedListener true
+            }
             }
             false
         }

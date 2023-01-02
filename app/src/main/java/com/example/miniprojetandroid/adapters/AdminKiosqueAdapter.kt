@@ -9,15 +9,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniprojetandroid.R
-import com.example.miniprojetandroid.entities.Kisoque
+import com.example.miniprojetandroid.entities.Kiosque
 
-class AdminKiosqueAdapter(val stations: Kisoque, val context: Context? ) : BaseAdapter() {
+class AdminKiosqueAdapter(val stations: Kiosque, val context: Context? ) : BaseAdapter() {
 
 
 
     private var layoutInflater: LayoutInflater? = null
     private lateinit var name: TextView
     private lateinit var img: ImageView
+
 
 
 
@@ -34,6 +35,8 @@ class AdminKiosqueAdapter(val stations: Kisoque, val context: Context? ) : BaseA
     override fun getItemId(p0: Int): Long {
         return 0
     }
+
+
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var convertView = p1
@@ -57,6 +60,7 @@ class AdminKiosqueAdapter(val stations: Kisoque, val context: Context? ) : BaseA
         img.setImageResource(R.drawable.kiosque)
         // on below line we are setting text in our course text view.
         name.setText(stations.get(p0).name)
+
         // at last we are returning our convert view.
         return convertView
     }

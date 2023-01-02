@@ -1,16 +1,15 @@
 package com.example.miniprojetandroid.entities
 
 data class UserX(
-    val resetLink: String,
+    val resetLink : String,
     val CIN: String,
-    val __v: Int?,
-    val myKiosque: List<String>,
+    val __v: Int,
     val _id: String,
     val createdAt: String,
     val email: String,
-    val role: Int,
+    val image: Image,
+    val myKiosque: List<Any>,
     val name: String,
-    val password: String
-) {
-
-}
+    val password: String,
+    val role: Int
+)

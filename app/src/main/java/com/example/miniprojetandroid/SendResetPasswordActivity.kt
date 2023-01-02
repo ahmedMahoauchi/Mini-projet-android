@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.miniprojetandroid.entities.ResetResponse
-import com.example.miniprojetandroid.entities.UserX
 import com.example.miniprojetandroid.network.ApiUser
 import retrofit2.Call
 import retrofit2.Callback

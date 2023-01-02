@@ -22,6 +22,8 @@ class Intro3 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         val view = inflater.inflate(R.layout.fragment_intro3, container, false)
 
         val button = view.findViewById<Button>(R.id.hello)

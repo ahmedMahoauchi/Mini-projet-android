@@ -1,11 +1,16 @@
 package com.example.miniprojetandroid.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.miniprojetandroid.COOR
+import com.example.miniprojetandroid.PREF_NAME
 import com.example.miniprojetandroid.R
+import com.example.miniprojetandroid.USER_COORD
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,21 +21,31 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
-
+    lateinit var mSharedPref: SharedPreferences
     private val callback = OnMapReadyCallback { googleMap ->
 
-        val henda = LatLng(37.316849, 9.869161)
-        val tunisia = LatLng(36.806389, 10.181667)
-        googleMap.addMarker(MarkerOptions()
-            .position(tunisia).title("Marker in Sydney")
-            .icon(BitmapDescriptorFactory.
-            defaultMarker( BitmapDescriptorFactory.HUE_AZURE)))
+        mSharedPref = requireContext().getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
+        val coordonne = mSharedPref.getString(COOR, "10,10").toString()
 
-        googleMap.addMarker(MarkerOptions()
-            .position(henda).title("Marker in Sydney")
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.gas_station_marker)))
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(henda))
+        val latLng = coordonne.split(",").toTypedArray()
+
+        val latitude = latLng[0].toDouble()
+        val longitude = latLng[1].toDouble()
+
+        val tunisia = LatLng(latitude, longitude)
+
+        googleMap.addMarker(
+            MarkerOptions()
+
+                .position(tunisia)
+                .title("lat")
+                .icon(
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                )
+        )
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(tunisia))
     }
 
     override fun onCreateView(

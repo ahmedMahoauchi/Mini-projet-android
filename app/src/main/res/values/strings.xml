@@ -42,5 +42,6 @@
     <string name="fb_login_protocol_scheme">fb1180081396252009</string>
     <string name="facebook_client_token">56789</string>
 
+    <string name="mapbox_access_token">pk.eyJ1IjoiYWhtZWRkZGQxOSIsImEiOiJjbGMzc2d5dzEyeTZxM29ueWtjcGtkcDU4In0.oG4dH6XQF0HBiH1ygchQ3Q</string>
 
 </resources>

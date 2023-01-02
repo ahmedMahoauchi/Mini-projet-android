@@ -15,5 +15,10 @@
         android:icon="@drawable/pending"
         android:title="pending" />
 
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/user_edit"
+        android:title="Profile" />
+
 
 </menu>

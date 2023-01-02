@@ -37,7 +37,11 @@ const val USER_ID = "USER_ID";
 const val USER_NAME = "USER_NAME";
 const val USER_EMAIL = "USER_EMAIL";
 const val USER_CIN = "USER_CIN";
+const val USER_IMAGE = "USER_IMAGE";
+const val USER_STATUT = "USER_STATUT";
 const val USER_KIOSQUE = "USER_KIOSQUE";
+const val USER_COORD = "USER_COORD";
+const val COOR = "COOR";
 
 class SignInActivity : AppCompatActivity() {
     lateinit var gso : GoogleSignInOptions
@@ -80,6 +84,12 @@ class SignInActivity : AppCompatActivity() {
 
         }
          emailET = findViewById(R.id.email_edittext)
+         val visitor = findViewById<TextView>(R.id.textView7)
+
+        visitor.setOnClickListener {
+            intent = Intent(this,AcceuilActivity::class.java)
+            startActivity(intent)
+        }
          passwordET = findViewById(R.id.password_edittext)
          val forgetpassword = findViewById<TextView>(R.id.textView13)
 
@@ -123,8 +133,19 @@ class SignInActivity : AppCompatActivity() {
                 Toast.makeText(this,"something went wrong !",Toast.LENGTH_SHORT).show()
             }
 
+        val acct = GoogleSignIn.getLastSignedInAccount(this)
+        mSharedPref.edit().apply{
+            putString(USER_ID, acct?.id)
+            putString(USER_NAME, acct?.displayName)
+            putString(USER_CIN, null)
+            putString(USER_EMAIL, acct?.email)
+            putString(USER_IMAGE, acct?.photoUrl.toString())
+            putInt(USER_STATUT,0)
 
-            intent = Intent(this,VoidKiosqueActivity::class.java)
+        }.apply()
+
+
+            intent = Intent(this,UserMainActivity::class.java)
             startActivity(intent)
             finish()
 
@@ -173,8 +194,11 @@ class SignInActivity : AppCompatActivity() {
                                    putString(USER_NAME, response.body()!!.user.name)
                                    putString(USER_CIN, response.body()!!.user.CIN)
                                    putString(USER_EMAIL, response.body()!!.user.email)
+                                   putInt(USER_STATUT, response.body()!!.user.role)
+                                   putString(USER_IMAGE, response.body()!!.user?.image?.url)
                                    if (!response.body()!!.user.myKiosque.isEmpty()){
-                                       putString(USER_KIOSQUE, response.body()!!.user.myKiosque[0])
+                                       putString(USER_KIOSQUE, response.body()!!.user.myKiosque[0].toString())
+                                       putString(USER_COORD, response.body()!!.user.myKiosque[0].toString())
                                    }else{
                                        putString(USER_KIOSQUE, "null")
                                    }
@@ -182,17 +206,15 @@ class SignInActivity : AppCompatActivity() {
                                }.apply()
 
                                 if(response.body()!!.user.role == 0){
-                                    if (!response.body()!!.user.myKiosque.isEmpty()){
-                                        val intent = Intent(this@SignInActivity, KiosqueDetailsActivity::class.java)
+                                        val intent = Intent(this@SignInActivity, UserMainActivity::class.java)
                                         startActivity(intent)
-                                        finish()
-                                    }else{
-                                        val intent = Intent(this@SignInActivity, VoidKiosqueActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
-                                    }
-                                }else{
+
+                                }else if(response.body()!!.user.role == 1){
                                     val intent = Intent(this@SignInActivity, AdminActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }else{
+                                    val intent = Intent(this@SignInActivity,AcceuilActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }

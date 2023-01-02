@@ -1,3 +1,3 @@
 package com.example.miniprojetandroid.entities
 
-class Kisoque : ArrayList<KisoqueItem>()
+class Kiosque : ArrayList<KiosqueItem>()
